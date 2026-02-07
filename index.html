@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A special message for someone very dear.">
+  <title>For You — With Love</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Layered background -->
+  <div class="page-bg">
+    <div class="bg-gradient"></div>
+    <div class="bg-grain"></div>
+    <div class="bokeh"></div>
+  </div>
+  <div class="theme-overlay" id="theme-overlay" aria-hidden="true"></div>
+  <div class="spotlight" id="spotlight" aria-hidden="true"></div>
+  <div id="particle-canvas" aria-hidden="true"></div>
+
+  <!-- Sticky controls -->
+  <div class="sticky-controls" role="group" aria-label="Page controls">
+    <button type="button" class="control-btn control-btn--replay" id="replay-btn" aria-label="Replay proposal animation" style="display: none;">Replay ✨</button>
+    <a href="letter.html" class="control-btn btn-link" id="letter-link" aria-label="Read the letter">Read the Letter 💌</a>
+    <div class="theme-controls">
+      <button type="button" class="control-btn" id="theme-prev" aria-label="Previous theme" style="display: none;">←</button>
+      <button type="button" class="control-btn" id="theme-mode" aria-label="Theme mode">Theme</button>
+      <button type="button" class="control-btn" id="theme-next" aria-label="Next theme" style="display: none;">→</button>
+    </div>
+    <div style="position: relative;">
+      <button type="button" class="control-btn control-btn--music" id="music-toggle" aria-label="Toggle background music" aria-pressed="false">Music</button>
+      <div class="music-popover" id="music-popover" role="dialog" aria-label="Music volume">
+        <div class="music-popover__row">
+          <label for="volume-slider">Volume</label>
+        </div>
+        <div class="music-popover__row">
+          <input type="range" id="volume-slider" min="0" max="100" value="30" aria-label="Volume">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <!-- 1) Hero -->
+    <section class="hero" id="hero" aria-labelledby="hero-title">
+      <div class="hero__content reveal">
+        <h1 id="hero-title" class="hero__title">Hey love… this is for you.</h1>
+        <p class="hero__subtext">Take a deep breath. Scroll slowly.</p>
+        <div class="hero__heart" aria-hidden="true">
+          <span class="heart-icon">♥</span>
+        </div>
+        <p class="hero__scroll-hint">Scroll <span class="scroll-arrow" aria-hidden="true">↓</span></p>
+      </div>
+    </section>
+
+    <!-- 2) Love lines -->
+    <section class="love-lines" id="love-lines" aria-labelledby="love-lines-heading">
+      <h2 id="love-lines-heading" class="visually-hidden">Words for you</h2>
+      <div class="love-lines__card">
+        <div class="love-lines__list" id="love-lines-list"></div>
+      </div>
+    </section>
+
+    <!-- 3) Why You cards -->
+    <section class="reasons" id="reasons" aria-labelledby="reasons-heading">
+      <h2 id="reasons-heading" class="visually-hidden">Why you</h2>
+      <div class="reasons__grid" id="reasons-grid"></div>
+    </section>
+
+    <!-- 4) Promise timeline -->
+    <section class="timeline" id="timeline" aria-labelledby="timeline-heading">
+      <h2 id="timeline-heading" class="visually-hidden">Our story</h2>
+      <div class="timeline__track" id="timeline-track">
+        <article class="timeline__step reveal" data-step="0">
+          <span class="timeline__dot" aria-hidden="true"></span>
+          <span class="timeline__label">The day we met</span>
+        </article>
+        <article class="timeline__step reveal" data-step="1">
+          <span class="timeline__dot" aria-hidden="true"></span>
+          <span class="timeline__label">The day I knew</span>
+        </article>
+        <article class="timeline__step reveal" data-step="2">
+          <span class="timeline__dot" aria-hidden="true"></span>
+          <span class="timeline__label">Every day since</span>
+        </article>
+        <article class="timeline__step reveal" data-step="3">
+          <span class="timeline__dot" aria-hidden="true"></span>
+          <span class="timeline__label">Forever</span>
+        </article>
+      </div>
+    </section>
+
+    <!-- 5) Proposal -->
+    <section class="proposal" id="proposal" aria-labelledby="proposal-question">
+      <div class="proposal__stage">
+        <h2 id="proposal-question" class="proposal__question">Will you be my forever?</h2>
+        <div class="proposal__buttons">
+          <button type="button" class="proposal__btn magnetic-btn" id="btn-yes" data-answer="yes">Yes 💍</button>
+          <button type="button" class="proposal__btn magnetic-btn" id="btn-always" data-answer="always">Always ❤️</button>
+        </div>
+        <div class="proposal__actions">
+          <a href="letter.html" class="proposal__btn btn-link" id="proposal-letter-link">Read the Letter 💌</a>
+        </div>
+        <div class="proposal__response" id="proposal-response" aria-live="polite" hidden>
+          <p class="proposal__response-text" id="proposal-response-text"></p>
+          <button type="button" class="proposal__btn btn-link" id="replay-inline" aria-label="Replay celebration">Replay ✨</button>
+        </div>
+      </div>
+      <div id="confetti-container" class="confetti-container" aria-hidden="true"></div>
+      <div id="firefly-container" class="firefly-container" aria-hidden="true"></div>
+    </section>
+
+    <!-- GIF modal (Yes answer) -->
+    <div class="gif-modal" id="gif-modal" role="dialog" aria-modal="true" aria-label="Celebration">
+      <div class="gif-modal__card">
+        <button type="button" class="gif-modal__close" id="gif-close" aria-label="Close">×</button>
+        <img class="gif-modal__media" id="gif-img" data-src="yes.gif" src="data:image/gif;base64,R0lGOODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Celebration" width="320" height="320">
+      </div>
+    </div>
+
+    <!-- 6) Ending -->
+    <section class="ending" id="ending" aria-labelledby="ending-text">
+      <p id="ending-text" class="ending__text">I love you. Today. Tomorrow. Forever.</p>
+      <footer class="ending__footer">Made with love.</footer>
+    </section>
+  </main>
+
+  <audio id="bg-audio" preload="metadata" aria-label="Background music">
+    <source src="the_mountain-valentine-317783.mp3" type="audio/mpeg">
+  </audio>
+
+  <script src="script.js"></script>
+</body>
+</html>

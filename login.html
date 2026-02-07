@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en" class="page-login">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A special moment for you.">
+  <title>For You — Unlock</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* ========== Login page overrides (mobile-first, transform/opacity only) ========== */
+    .page-login body {
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(1rem, 5vw, var(--space-xl));
+      transition: background var(--duration-slow), color var(--duration-slow);
+    }
+    .page-login .login-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background: var(--theme-gradient);
+      background-size: 200% 200%;
+      animation: login-gradient-drift 18s ease-in-out infinite;
+      transition: opacity var(--duration-slow);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .page-login .login-bg { animation: none; }
+    }
+    @keyframes login-gradient-drift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    .page-login.login-sad .login-bg {
+      background: linear-gradient(135deg, #e8ecf0 0%, #d4dce4 40%, #c8d0d8 70%, #e0e6ec 100%);
+      animation: none;
+    }
+    .page-login.login-reveal .login-bg,
+    .page-login.login-welcome .login-bg {
+      background: linear-gradient(135deg, #faf8f6 0%, #f5e1e3 40%, #e8d5d2 70%, #f5f0eb 100%);
+      animation: none;
+    }
+    .page-login .login-wrap {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: min(420px, calc(100vw - 2rem));
+    }
+    .page-login .login-card {
+      background: var(--color-overlay);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--color-card-border);
+      border-radius: 20px;
+      padding: clamp(var(--space-xl), 4vw, var(--space-2xl)) clamp(1rem, 4vw, var(--space-xl));
+      box-shadow: 0 8px 28px rgba(0,0,0,0.06);
+      transition: transform var(--duration-normal), opacity var(--duration-normal);
+    }
+    .page-login .login-card.shake {
+      animation: login-card-shake 0.5s var(--ease-out-quad);
+    }
+    @keyframes login-card-shake {
+      0%, 100% { transform: translateX(0); }
+      20% { transform: translateX(-6px); }
+      40% { transform: translateX(6px); }
+      60% { transform: translateX(-4px); }
+      80% { transform: translateX(4px); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .page-login .login-card.shake { animation: none; }
+    }
+    .page-login .login-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.35rem, 4vw + 0.75rem, 1.75rem);
+      font-weight: 600;
+      color: var(--color-charcoal);
+      text-align: center;
+      margin-bottom: var(--space-sm);
+      line-height: 1.4;
+      overflow-wrap: break-word;
+    }
+    .page-login .login-subtext {
+      font-size: clamp(0.9rem, 2vw + 0.5rem, 1rem);
+      line-height: 1.5;
+      color: var(--color-charcoal-soft);
+      text-align: center;
+      margin-bottom: var(--space-xl);
+    }
+    .page-login .login-input-wrap {
+      position: relative;
+      margin-bottom: var(--space-lg);
+    }
+    .page-login .login-input {
+      width: 100%;
+      font-family: var(--font-display);
+      font-size: clamp(1.25rem, 3vw + 0.5rem, 1.5rem);
+      letter-spacing: 0.15em;
+      text-align: center;
+      padding: clamp(0.75rem, 2vw, var(--space-md)) clamp(var(--space-md), 3vw, var(--space-lg));
+      min-height: 48px;
+      border: 2px solid var(--color-accent-soft);
+      border-radius: 12px;
+      background: rgba(255,255,255,0.6);
+      color: var(--color-charcoal);
+      transition: transform var(--duration-fast), border-color var(--duration-fast);
+    }
+    .page-login .login-input::placeholder {
+      color: var(--color-charcoal-soft);
+      opacity: 0.7;
+    }
+    .page-login .login-input:focus {
+      outline: none;
+      border-color: var(--color-accent);
+      outline: 2px solid var(--color-accent);
+      outline-offset: 2px;
+    }
+    .page-login .login-input.shake {
+      animation: login-input-shake 0.4s var(--ease-out-quad);
+    }
+    @keyframes login-input-shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-4px); }
+      75% { transform: translateX(4px); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .page-login .login-input.shake { animation: none; }
+    }
+    .page-login .login-input.digit-pop {
+      animation: login-digit-pop 0.25s var(--ease-out-expo);
+    }
+    @keyframes login-digit-pop {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+      100% { transform: scale(1); }
+    }
+    .page-login .login-btn {
+      width: 100%;
+      font-family: var(--font-display);
+      font-size: clamp(1rem, 2vw + 0.5rem, 1.1rem);
+      padding: clamp(0.75rem, 2vw, var(--space-md)) var(--space-xl);
+      min-height: 48px;
+      border: none;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--color-accent-soft), var(--color-blush));
+      color: var(--color-charcoal);
+      cursor: pointer;
+      transition: transform var(--duration-fast), opacity var(--duration-fast);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+    }
+    .page-login .login-btn:hover:not(:disabled),
+    .page-login .login-btn:focus-visible:not(:disabled) {
+      transform: scale(1.02);
+      outline: 2px solid var(--color-accent);
+      outline-offset: 2px;
+    }
+    .page-login .login-btn:disabled {
+      cursor: not-allowed;
+      opacity: 0.8;
+    }
+    .page-login .login-msg {
+      text-align: center;
+      margin-top: var(--space-md);
+      font-size: clamp(0.95rem, 1.5vw + 0.5rem, 1rem);
+      color: var(--color-accent-deep);
+      min-height: 1.5em;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity var(--duration-normal), transform var(--duration-normal);
+    }
+    .page-login .login-msg.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .page-login .login-msg.error {
+      color: var(--color-accent-deep);
+    }
+
+    /* Section 2 — Fake failure / Sad screen */
+    .page-login .login-section {
+      position: fixed;
+      inset: 0;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-xl);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity var(--duration-slow), visibility var(--duration-slow);
+    }
+    .page-login .login-section.active {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+    .page-login .login-entry-wrap {
+      position: relative;
+      z-index: 1;
+    }
+    .page-login .login-entry-wrap.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity var(--duration-slow), visibility var(--duration-slow);
+    }
+    .page-login .login-fake-msg {
+      text-align: center;
+      font-family: var(--font-display);
+      font-size: clamp(1.1rem, 2.5vw + 0.5rem, 1.35rem);
+      color: var(--color-charcoal);
+      margin-bottom: var(--space-xl);
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity var(--duration-slow), transform var(--duration-slow);
+    }
+    .page-login .login-fake-msg.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Sad screen */
+    .page-login .login-sad-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-xl);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity var(--duration-slow), visibility var(--duration-slow);
+      background: linear-gradient(135deg, #e8ecf0 0%, #d4dce4 50%, #c8d0d8 100%);
+    }
+    .page-login .login-sad-screen.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .page-login .login-sad-screen .login-sad-text {
+      font-family: var(--font-display);
+      font-size: clamp(1.15rem, 3vw + 0.5rem, 1.4rem);
+      font-style: italic;
+      color: #5a6570;
+      text-align: center;
+      line-height: 1.6;
+      max-width: 320px;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity var(--duration-slow) 0.3s, transform var(--duration-slow) 0.3s;
+    }
+    .page-login .login-sad-screen.active .login-sad-text {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .page-login .broken-heart {
+      width: 64px;
+      height: 64px;
+      margin-bottom: var(--space-2xl);
+      opacity: 0;
+      transition: opacity var(--duration-slow) 0.2s;
+    }
+    .page-login .login-sad-screen.active .broken-heart {
+      opacity: 0.9;
+      animation: login-heart-crack 3s var(--ease-out-quad) forwards;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .page-login .broken-heart { animation: none; }
+    }
+    @keyframes login-heart-crack {
+      0% { transform: scale(1); opacity: 0.9; }
+      30% { transform: scale(1.05); opacity: 0.95; }
+      100% { transform: scale(1); opacity: 0.85; }
+    }
+
+    /* Reveal screen */
+    .page-login .login-reveal-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-xl);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity var(--duration-slow), visibility var(--duration-slow);
+      background: linear-gradient(135deg, #faf8f6 0%, #f5e1e3 40%, #e8d5d2 70%, #f5f0eb 100%);
+    }
+    .page-login .login-reveal-screen.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .page-login .login-reveal-inner {
+      max-width: 360px;
+      width: 100%;
+    }
+    .page-login .login-reveal-line {
+      font-family: var(--font-display);
+      font-size: clamp(1.05rem, 2.5vw + 0.5rem, 1.25rem);
+      color: var(--color-charcoal);
+      text-align: center;
+      line-height: 1.6;
+      margin-bottom: var(--space-lg);
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity var(--duration-slow) var(--ease-out-expo), transform var(--duration-slow) var(--ease-out-expo);
+    }
+    .page-login .login-reveal-line.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .page-login .login-reveal-line:last-child {
+      margin-bottom: 0;
+    }
+    .page-login .login-reveal-hearts {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .page-login .login-reveal-heart {
+      position: absolute;
+      font-size: 1rem;
+      opacity: 0;
+      animation: login-float-heart 4s ease-out forwards;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .page-login .login-reveal-heart { display: none; }
+    }
+    @keyframes login-float-heart {
+      0% { opacity: 0; transform: translateY(0) scale(0.5); }
+      15% { opacity: 0.4; transform: translateY(-20px) scale(1); }
+      100% { opacity: 0; transform: translateY(-80px) scale(0.8); }
+    }
+
+    /* Welcome + redirect */
+    .page-login .login-welcome-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-xl);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity var(--duration-slow), visibility var(--duration-slow);
+      background: linear-gradient(135deg, #faf8f6 0%, #f5e1e3 50%, #e8d5d2 100%);
+    }
+    .page-login .login-welcome-screen.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .page-login .login-welcome-text {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 4vw + 0.5rem, 2rem);
+      font-weight: 600;
+      color: var(--color-charcoal);
+      opacity: 0;
+      transform: scale(0.95);
+      transition: opacity var(--duration-slow), transform var(--duration-slow);
+    }
+    .page-login .login-welcome-screen.active .login-welcome-text {
+      opacity: 1;
+      transform: scale(1);
+    }
+  </style>
+</head>
+<body data-theme="0">
+  <div class="login-bg" aria-hidden="true"></div>
+
+  <!-- Section 1 — Number entry -->
+  <div class="login-entry-wrap" id="entry-wrap">
+    <div class="login-wrap">
+      <div class="login-card" id="login-card">
+        <h1 class="login-title">Enter the number you think is right</h1>
+        <p class="login-subtext">Numbers only. I already know you are 💕</p>
+        <form class="login-form" id="login-form" novalidate>
+          <div class="login-input-wrap">
+            <input
+              type="text"
+              inputmode="numeric"
+              pattern="[0-9]*"
+              autocomplete="off"
+              maxlength="6"
+              class="login-input"
+              id="login-input"
+              placeholder="DDMMYY"
+              aria-label="Enter the date"
+              aria-describedby="login-msg"
+            >
+          </div>
+          <button type="submit" class="login-btn" id="login-btn">Unlock 💞</button>
+          <p class="login-msg" id="login-msg" role="status"></p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 — Fake "wrong" then sad screen -->
+  <div class="login-section" id="fake-failure-section">
+    <div class="login-wrap">
+      <p class="login-fake-msg" id="fake-msg">Oops… that's not right.</p>
+    </div>
+  </div>
+
+  <div class="login-sad-screen" id="sad-screen">
+    <svg class="broken-heart" id="broken-heart" viewBox="0 0 24 24" fill="none" stroke="#8a9aa8" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" stroke-dasharray="2 1" stroke-dashoffset="0"/>
+    </svg>
+    <p class="login-sad-text">
+      Sometimes even perfect things<br>
+      feel like they slip away…
+    </p>
+  </div>
+
+  <!-- Section 3 — Just kidding reveal -->
+  <div class="login-reveal-screen" id="reveal-screen">
+    <div class="login-reveal-hearts" id="reveal-hearts" aria-hidden="true"></div>
+    <div class="login-reveal-inner">
+      <p class="login-reveal-line" data-line="0">Just kidding 😌</p>
+      <p class="login-reveal-line" data-line="1">You're always right.</p>
+      <p class="login-reveal-line" data-line="2">My goddess.</p>
+      <p class="login-reveal-line" data-line="3">The perfect woman I've always admired.</p>
+      <p class="login-reveal-line" data-line="4">I am forever grateful for you.</p>
+      <p class="login-reveal-line" data-line="5">And I would choose you — in every lifetime.</p>
+    </div>
+  </div>
+
+  <!-- Section 4 — Welcome + redirect -->
+  <div class="login-welcome-screen" id="welcome-screen">
+    <p class="login-welcome-text" id="welcome-text">Welcome home 💖</p>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const CORRECT_CODE = '142006';
+      const SAD_DURATION_MS = 10000;
+      const REVEAL_LINE_DELAY_MS = 600;
+      const WELCOME_SHOW_MS = 3500;
+      const REDIRECT_DELAY_MS = 2200;
+
+      const form = document.getElementById('login-form');
+      const input = document.getElementById('login-input');
+      const btn = document.getElementById('login-btn');
+      const msg = document.getElementById('login-msg');
+      const card = document.getElementById('login-card');
+      const entryWrap = document.getElementById('entry-wrap');
+      const fakeSection = document.getElementById('fake-failure-section');
+      const fakeMsg = document.getElementById('fake-msg');
+      const sadScreen = document.getElementById('sad-screen');
+      const revealScreen = document.getElementById('reveal-screen');
+      const revealLines = document.querySelectorAll('.login-reveal-line');
+      const revealHearts = document.getElementById('reveal-hearts');
+      const welcomeScreen = document.getElementById('welcome-screen');
+      const welcomeText = document.getElementById('welcome-text');
+      const body = document.body;
+
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // Numeric only input
+      if (input) {
+        input.addEventListener('input', function () {
+          this.value = this.value.replace(/\D/g, '').slice(0, 6);
+          if (this.value.length > 0) {
+            this.classList.add('digit-pop');
+            setTimeout(function () { input.classList.remove('digit-pop'); }, 250);
+          }
+        });
+        input.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter') e.preventDefault();
+        });
+      }
+
+      function showMsg(text, isError) {
+        if (!msg) return;
+        msg.textContent = text;
+        msg.classList.add('visible');
+        if (isError) msg.classList.add('error');
+        else msg.classList.remove('error');
+      }
+
+      function hideMsg() {
+        if (msg) msg.classList.remove('visible');
+      }
+
+      function wrongCode() {
+        if (input) {
+          input.classList.add('shake');
+          setTimeout(function () { input.classList.remove('shake'); }, 400);
+        }
+        showMsg('Hmm… try again, love 💗', true);
+      }
+
+      function startFakeFailure() {
+        if (!btn || !card || !fakeSection || !fakeMsg) return;
+        btn.disabled = true;
+        hideMsg();
+        card.classList.add('shake');
+        setTimeout(function () {
+          fakeMsg.classList.add('visible');
+        }, 400);
+        setTimeout(function () {
+          body.classList.add('login-sad');
+          entryWrap.classList.add('hidden');
+          fakeSection.classList.add('active');
+        }, 600);
+        setTimeout(function () {
+          fakeSection.classList.remove('active');
+          if (sadScreen) sadScreen.classList.add('active');
+        }, 1800);
+        setTimeout(function () {
+          body.classList.remove('login-sad');
+          body.classList.add('login-reveal');
+          if (sadScreen) sadScreen.classList.remove('active');
+          if (revealScreen) revealScreen.classList.add('active');
+          animateRevealLines();
+          spawnHearts();
+        }, 1800 + SAD_DURATION_MS);
+      }
+
+      function animateRevealLines() {
+        if (!revealLines.length) return;
+        revealLines.forEach(function (line, i) {
+          setTimeout(function () {
+            line.classList.add('visible');
+          }, i * REVEAL_LINE_DELAY_MS);
+        });
+      }
+
+      function spawnHearts() {
+        if (prefersReducedMotion || !revealHearts) return;
+        const chars = ['♥', '💗', '💕'];
+        for (var i = 0; i < 12; i++) {
+          (function (j) {
+            setTimeout(function () {
+              var el = document.createElement('span');
+              el.className = 'login-reveal-heart';
+              el.textContent = chars[j % 3];
+              el.style.left = (10 + Math.random() * 80) + '%';
+              el.style.top = '100%';
+              el.style.animationDelay = (Math.random() * 0.5) + 's';
+              revealHearts.appendChild(el);
+              setTimeout(function () { el.remove(); }, 4500);
+            }, j * 280);
+          })(i);
+        }
+      }
+
+      function showWelcomeAndRedirect() {
+        var afterSadMs = 1800 + SAD_DURATION_MS;
+        var revealLinesDuration = revealLines.length * REVEAL_LINE_DELAY_MS + 1200;
+        var showWelcomeAt = afterSadMs + revealLinesDuration + 500;
+        setTimeout(function () {
+          if (revealScreen) revealScreen.classList.remove('active');
+          body.classList.add('login-welcome');
+          if (welcomeScreen) welcomeScreen.classList.add('active');
+          setTimeout(function () {
+            if (welcomeScreen) welcomeScreen.style.opacity = '0';
+            setTimeout(function () {
+              window.location.href = 'index.html';
+            }, 800);
+          }, WELCOME_SHOW_MS);
+        }, showWelcomeAt);
+      }
+
+      if (form) {
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          var val = (input && input.value) ? input.value.trim() : '';
+          if (val !== CORRECT_CODE) {
+            wrongCode();
+            return;
+          }
+          startFakeFailure();
+          showWelcomeAndRedirect();
+        });
+      }
+
+      // Prevent accidental navigation
+      input.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') form && form.requestSubmit();
+      });
+    })();
+  </script>
+</body>
+</html>

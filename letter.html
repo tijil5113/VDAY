@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" class="page-letter">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A letter for you.">
+  <title>The Letter — For You</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-bg">
+    <div class="bg-gradient"></div>
+    <div class="bg-grain"></div>
+    <div class="bokeh"></div>
+  </div>
+  <div class="theme-overlay" id="theme-overlay" aria-hidden="true"></div>
+  <div id="particle-canvas" aria-hidden="true"></div>
+
+  <div class="sticky-controls">
+    <a href="index.html" class="control-btn btn-link" aria-label="Back to home">Back Home 🏡</a>
+    <button type="button" class="control-btn control-btn--music" id="music-toggle" aria-label="Toggle music" aria-pressed="false" style="display: none;">Music</button>
+  </div>
+
+  <!-- Envelope (tap to open) -->
+  <div class="letter-envelope-wrap" id="envelope-wrap">
+    <div class="envelope" id="envelope" role="button" tabindex="0" aria-label="Tap to open the letter">
+      <div class="envelope__flap"></div>
+      <div class="envelope__body"></div>
+    </div>
+    <p class="envelope__tap-hint">Tap to open</p>
+  </div>
+
+  <!-- Letter content (shown after open) -->
+  <div class="letter-content-wrap" id="letter-content">
+    <div class="letter-paper">
+      <div class="letter-paper__inner">
+        <p class="letter-body">
+          <span class="letter-type-in" id="letter-first-line" aria-live="polite"></span><br>
+          <span class="letter-type-in" id="letter-second-line"></span>
+        </p>
+        <p class="letter-body">
+          You turn ordinary days into quiet wonders,<br>
+          moments I didn’t know I’d been waiting my whole life for.
+        </p>
+        <p class="letter-body">
+          I love the music in your laughter,<br>
+          the patience in the way you listen,<br>
+          the tenderness in the way you care—<br>
+          as if loving is something you were born knowing how to do.
+        </p>
+        <p class="letter-body">
+          With you, I found a home not built of walls,<br>
+          but of warmth, safety, and belonging—<br>
+          a place my heart somehow always remembered.
+        </p>
+        <p class="letter-body">
+          I choose you, not just in grand gestures,<br>
+          but in the smallest moments,<br>
+          every day, in every way, again and again.
+        </p>
+        <p class="letter-body">
+          You are the most beautiful chapter of my story,<br>
+          the one I never want to stop reading.
+        </p>
+        <p class="letter-body">
+          Every moment with you feels like a gift<br>
+          I unwrap slowly, afraid of missing even a second.
+        </p>
+        <p class="letter-body">
+          This is for you—<br>
+          with every piece of my heart,<br>
+          now, always, and forever. 💞
+        </p>
+        <p class="letter-signature" id="letter-signature">
+          — Forever yours
+        </p>
+        <div class="letter-actions">
+          <button type="button" class="control-btn btn-link" id="save-moment" aria-label="Save this moment by printing">Save this moment</button>
+          <a href="index.html" class="control-btn btn-link">Back Home 🏡</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <audio id="bg-audio" preload="metadata" aria-label="Background music">
+    <source src="the_mountain-valentine-317783.mp3" type="audio/mpeg">
+  </audio>
+
+  <script src="letter.js"></script>
+</body>
+</html>
