@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" class="page-intro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="The days that led to us.">
+  <title>The Days That Led to Us — For You</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-theme="0">
+  <div class="intro-bg" aria-hidden="true">
+    <div class="intro-bg__gradient"></div>
+    <div class="intro-bg__grain"></div>
+    <div class="intro-bg__bokeh"></div>
+  </div>
+  <div class="theme-overlay intro-theme-overlay" id="intro-theme-overlay" aria-hidden="true"></div>
+  <div class="intro-spotlight" id="intro-spotlight" aria-hidden="true"></div>
+
+  <a href="proposal.html" class="intro-skip" id="intro-skip">Skip intro</a>
+  <a href="chocolateday.html" class="intro-choco-link" id="intro-choco-link">Chocolate Day 🍫</a>
+  <div class="intro-theme-wrap" id="intro-theme-controls" role="group" aria-label="Theme"></div>
+
+  <main class="intro-main">
+    <!-- Section 1 — Hero -->
+    <section class="intro-hero" id="intro-hero" aria-labelledby="intro-hero-title">
+      <div class="intro-hero__content reveal" id="intro-hero-content">
+        <h1 id="intro-hero-title" class="intro-hero__title">
+          <span class="intro-hero__line1">Some days are just dates…</span>
+          <span class="intro-hero__line2">Some days change everything.</span>
+          <span class="intro-hero__line3">These are ours.</span>
+        </h1>
+        <div class="intro-hero__heart" aria-hidden="true">
+          <svg class="intro-hero__heart-svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        </div>
+        <p class="intro-hero__scroll">Scroll <span class="intro-hero__arrow" aria-hidden="true">↓</span></p>
+      </div>
+    </section>
+
+    <!-- Section 2 — Timeline -->
+    <section class="intro-timeline" id="intro-timeline" aria-labelledby="intro-timeline-heading">
+      <h2 id="intro-timeline-heading" class="visually-hidden">Love Days Timeline</h2>
+      <div class="intro-timeline__wrap">
+        <div class="intro-timeline__rail" id="intro-timeline-rail">
+          <!-- Cards injected by intro.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3 — Why -->
+    <section class="intro-why" id="intro-why" aria-labelledby="intro-why-heading">
+      <div class="intro-why__wrap reveal">
+        <p id="intro-why-heading" class="intro-why__text">
+          I didn’t want to give you just one day… I wanted to give you the journey.
+        </p>
+      </div>
+    </section>
+
+    <!-- Section 4 — CTA -->
+    <section class="intro-cta" id="intro-cta" aria-labelledby="intro-cta-heading">
+      <div class="intro-cta__wrap reveal">
+        <h2 id="intro-cta-heading" class="visually-hidden">Continue</h2>
+        <a href="proposal.html" class="intro-cta__btn magnetic-btn" id="intro-cta-btn">Continue Our Story →</a>
+        <p class="intro-cta__sub">Take your time. I’ll wait.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Card detail modal -->
+  <div class="intro-modal" id="intro-modal" role="dialog" aria-modal="true" aria-labelledby="intro-modal-title" aria-hidden="true">
+    <div class="intro-modal__backdrop" id="intro-modal-backdrop"></div>
+    <div class="intro-modal__card">
+      <button type="button" class="intro-modal__close" id="intro-modal-close" aria-label="Close">×</button>
+      <h3 id="intro-modal-title" class="intro-modal__title"></h3>
+      <p class="intro-modal__body" id="intro-modal-body"></p>
+    </div>
+  </div>
+
+  <!-- Transition overlays (for Proposal / Chocolate navigation) -->
+  <div class="intro-transition intro-transition--proposal" id="intro-transition-proposal" aria-hidden="true"></div>
+  <div class="intro-transition intro-transition--chocolate" id="intro-transition-chocolate" aria-hidden="true"></div>
+  <div class="intro-transition-hearts" id="intro-transition-hearts" aria-hidden="true"></div>
+
+  <!-- Surprise GIF (lazy): shown during Proposal transition -->
+  <div class="intro-surprise-gif intro-surprise-gif--proposal" id="intro-surprise-proposal" aria-hidden="true">
+    <img class="intro-surprise-gif__img" id="intro-surprise-proposal-img" data-src="yes.gif" src="" alt="" width="200" height="200" loading="lazy">
+  </div>
+
+  <script src="intro.js"></script>
+</body>
+</html>

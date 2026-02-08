@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" class="chocolateday" id="choco-root">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Chocolate Day — For the sweetest woman.">
+  <title>Chocolate Day 🍫 — For You</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="chocolateday.css">
+</head>
+<body>
+  <div class="choco-page-bg" aria-hidden="true">
+    <div class="choco-page-bg__gradient"></div>
+    <div class="choco-page-bg__grain"></div>
+    <div class="choco-page-bg__bokeh" id="choco-bokeh" aria-hidden="true"></div>
+  </div>
+
+  <a href="intro.html" class="choco-nav-link choco-nav-link--top" id="choco-back">Back to Days</a>
+
+  <div class="choco-extra-controls">
+    <div class="choco-sweet-meter" id="choco-sweet-meter" aria-label="Sweetness meter">
+      <span class="choco-sweet-meter__fill" id="choco-sweet-meter-fill"></span>
+      <span class="choco-sweet-meter__label" id="choco-sweet-meter-label"></span>
+    </div>
+    <button type="button" class="choco-cozy-toggle" id="choco-cozy-toggle" aria-pressed="false">Cozy Mode ☕🍫</button>
+  </div>
+
+  <main class="choco-main-wrap">
+    <section class="choco-hero" id="choco-hero" aria-labelledby="choco-hero-title">
+      <h1 id="choco-hero-title" class="choco-hero__title">Chocolate Day 🍫</h1>
+      <div class="choco-hero__narrative" id="choco-hero-narrative">
+        <p>You have that dangerous sweetness —<br>the kind that doesn't shout,<br>just slowly takes over.</p>
+        <p>I think about your warmth,<br>the way you'd lean in,<br>the way everything else would fade<br>until it's just us and that quiet tension.</p>
+        <p>If love had a temperature,<br>you'd be the moment right before melting.</p>
+      </div>
+      <a href="#choco-box-section" class="choco-hero__cta" id="choco-hero-cta">Open my chocolate box →</a>
+      <span class="choco-hero-heart" id="choco-hero-heart" aria-hidden="true" tabindex="0">💗</span>
+    </section>
+
+    <section class="choco-box-section reveal" id="choco-box-section" aria-labelledby="choco-box-heading">
+      <h2 id="choco-box-heading" class="visually-hidden">Chocolate box</h2>
+      <div class="choco-box-grid" id="choco-box-grid"></div>
+    </section>
+
+    <section class="choco-question-section reveal" id="choco-question-section" aria-labelledby="choco-question-title">
+      <h2 id="choco-question-title" class="choco-question__title">A little question before your surprise 🍫💗</h2>
+      <p class="choco-question__q">14 + 20 = ?</p>
+      <p class="choco-question__sub" id="choco-question-sub">Choose what you think is needed to complete the heart.</p>
+
+      <div class="choco-heart-puzzle" id="choco-heart-puzzle">
+        <div class="choco-heart-wrap" id="choco-heart-wrap">
+          <div class="choco-heart-outline" id="choco-heart-outline" aria-hidden="true">
+            <span class="choco-heart-seg" id="choco-heart-seg-1"></span>
+            <span class="choco-heart-seg" id="choco-heart-seg-2"></span>
+            <span class="choco-heart-seg" id="choco-heart-seg-3"></span>
+            <span class="choco-heart-seg" id="choco-heart-seg-4"></span>
+            <span class="choco-heart-seg" id="choco-heart-seg-5"></span>
+          </div>
+          <div class="choco-heart-open-inner" id="choco-heart-open-inner" hidden>
+            <div class="choco-letter" id="choco-letter">
+              <p class="choco-letter-line" data-line="0">You didn't solve this.</p>
+              <p class="choco-letter-line" data-line="1">You felt it.</p>
+              <p class="choco-letter-line" data-line="2">You chose meaning over numbers,</p>
+              <p class="choco-letter-line" data-line="3">presence over answers,</p>
+              <p class="choco-letter-line" data-line="4">us over everything else.</p>
+              <p class="choco-letter-line" data-line="5">That's how you've always loved me.</p>
+              <p class="choco-letter-line" data-line="6">Slowly.</p>
+              <p class="choco-letter-line" data-line="7">Genuinely.</p>
+              <p class="choco-letter-line" data-line="8">Completely.</p>
+              <p class="choco-letter-line" data-line="9">And that's why this heart</p>
+              <p class="choco-letter-line" data-line="10">was always meant to open for you.</p>
+            </div>
+            <div class="choco-heart-gif-wrap" id="choco-heart-gif-wrap">
+              <img class="choco-heart-gif" id="choco-heart-gif" src="" alt="" width="240" height="240" loading="lazy">
+            </div>
+            <div class="choco-gift-actions choco-heart-actions">
+              <button type="button" class="choco-gift-btn choco-gift-btn--read" id="choco-gift-read-again">Read it again 💞</button>
+              <a href="proposal.html" class="choco-gift-btn choco-gift-btn--continue">Continue our story →</a>
+            </div>
+          </div>
+        </div>
+
+        <p class="choco-question__feedback" id="choco-question-feedback" hidden></p>
+        <div class="choco-question__options choco-heart-options" id="choco-question-options">
+          <button type="button" class="choco-option choco-heart-option" data-answer="34">34</button>
+          <button type="button" class="choco-option choco-heart-option" data-answer="Love">Love</button>
+          <button type="button" class="choco-option choco-heart-option" data-answer="You">You</button>
+          <button type="button" class="choco-option choco-heart-option" data-answer="Us">Us</button>
+          <button type="button" class="choco-option choco-heart-option" data-answer="Forever">Forever</button>
+          <button type="button" class="choco-option choco-heart-option" data-answer="Patience">Patience</button>
+        </div>
+      </div>
+
+      <p class="choco-heart-waiting" id="choco-heart-waiting" hidden>There you are…<br>I was waiting.</p>
+    </section>
+
+    <section class="choco-closing reveal" aria-labelledby="choco-closing-text">
+      <p id="choco-closing-text" class="choco-closing__text">You have that dangerous sweetness — the kind that doesn't shout, just slowly takes over.</p>
+      <div class="choco-closing__links">
+        <a href="intro.html" class="choco-closing__link">Back</a>
+        <a href="proposal.html" class="choco-closing__link choco-closing__link--primary">Continue</a>
+      </div>
+    </section>
+  </main>
+
+  <div class="choco-easter-toast" id="choco-easter-toast" aria-live="polite" hidden>Okay okay… I love you a lot 😭💗</div>
+
+  <div class="choco-gif-modal" id="choco-gif-modal" role="dialog" aria-modal="true" aria-label="Sweet moment" aria-hidden="true">
+    <div class="choco-gif-modal__backdrop"></div>
+    <div class="choco-gif-modal__card">
+      <button type="button" class="choco-gif-modal__close" id="choco-gif-modal-close" aria-label="Close">×</button>
+      <div class="choco-gif-modal__img-wrap">
+        <img class="choco-gif-modal__img" id="choco-gif-modal-img" src="" alt="" width="280" height="280" loading="lazy">
+      </div>
+    </div>
+  </div>
+
+  <audio id="choco-audio" preload="metadata" aria-label="Ambient music" loop>
+    <source src="daynigthmorning-romantic-ambient-valentine-238704.mp3" type="audio/mpeg">
+  </audio>
+
+  <script src="chocolateday.js"></script>
+</body>
+</html>
